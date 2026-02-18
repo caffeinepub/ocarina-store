@@ -1,0 +1,126 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Ocarina Store Admin — Frontend Admin Dashboard",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Enforce admin-only authorization in the UI by checking caller role/admin status and guarding admin routes/actions.",
+      "acceptanceCriteria": [
+        "Backend exposes an isAdmin-style check based on caller principal against an admin allowlist.",
+        "Any admin-only backend method rejects calls from non-admin principals with a clear error.",
+        "Frontend hides or disables admin-only UI for non-admin users and shows an \"Access denied\" state if they navigate directly to admin routes."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useAdminStatus.ts",
+          "operation": "create",
+          "description": "Create a React Query hook that uses the authorization component’s backend capabilities (e.g., isCallerAdmin / getCallerUserRole via the actor) to compute whether the current user is an admin. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/AdminRouteGuard.tsx",
+          "operation": "create",
+          "description": "Create an admin-route guard component that uses useAdminStatus to render children only for admins and otherwise render an English \"Access denied\" state (and avoid rendering admin tools). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/AccessDenied.tsx",
+          "operation": "create",
+          "description": "Create a dedicated Access Denied page/view with English messaging for unauthorized users who attempt to access admin-only routes."
+        },
+        {
+          "path": "frontend/src/pages/AdminDashboard.tsx",
+          "operation": "modify",
+          "description": "Ensure all admin-only actions within the Admin Dashboard are disabled/hidden when not admin (defense-in-depth), and gracefully handle backend authorization errors by showing user-friendly English error messages (no raw traps)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Build an Admin Dashboard UI to list products, add new products, and edit existing products with validation and React Query refresh patterns.",
+      "acceptanceCriteria": [
+        "Admin Dashboard includes: (1) product table/list, (2) \"Add product\" form, (3) \"Edit product\" flow that pre-fills existing values.",
+        "Submitting add/edit calls the backend and refreshes the product list using React Query patterns.",
+        "Form validation prevents empty required fields (e.g., title, price) and shows user-friendly error messages in English."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/products/useProducts.ts",
+          "operation": "create",
+          "description": "Create React Query hooks for product management (listProducts, createProduct, updateProduct) using the existing actor methods from the backend interface; ensure mutations invalidate/refresh the product list query."
+        },
+        {
+          "path": "frontend/src/pages/AdminDashboard.tsx",
+          "operation": "create",
+          "description": "Implement the Admin Dashboard screen with (1) product list/table, (2) add product form, and (3) edit product flow that pre-fills values; use shadcn-ui components (e.g., button/input/table/dialog/card equivalents available in the template) for consistent UI. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/products/ProductForm.tsx",
+          "operation": "create",
+          "description": "Create a reusable ProductForm component for both add/edit flows with English validation messages for required fields (title, price, etc.) and basic numeric/format validation for price."
+        },
+        {
+          "path": "frontend/src/components/products/ProductList.tsx",
+          "operation": "create",
+          "description": "Create a product list/table component that renders products and exposes an edit action; use shadcn-ui table-related components where available for consistent styling. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Add routing and navigation entry points for the Admin Dashboard, visible only to admins, with direct-route protection for non-admins.",
+      "acceptanceCriteria": [
+        "An \"Admin\" nav entry is visible only to admins.",
+        "Directly visiting the admin route as a non-admin shows an English access-denied message and does not render admin tools.",
+        "Admins can reach the dashboard without console errors."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the app root with routing that includes an admin route (wrapped by AdminRouteGuard) and an access-denied route/view; wire the Admin Dashboard page into navigation (no orphan screens)."
+        },
+        {
+          "path": "frontend/src/components/NavBar.tsx",
+          "operation": "create",
+          "description": "Create a top navigation component that shows an \"Admin\" link only when useAdminStatus indicates the user is an admin; keep all user-facing text in English."
+        },
+        {
+          "path": "frontend/src/components/AppLayout.tsx",
+          "operation": "create",
+          "description": "Create a shared layout wrapper (header + content container) used by admin pages to ensure consistent navigation and spacing."
+        },
+        {
+          "path": "frontend/src/main.tsx",
+          "operation": "modify",
+          "description": "Ensure the application renders the new App routing/layout entry and remains wrapped by the existing QueryClientProvider and InternetIdentityProvider."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Apply a cohesive, non-blue/purple primary visual theme across admin list/forms using Tailwind styling and consistent layout primitives.",
+      "acceptanceCriteria": [
+        "Admin pages use a consistent layout (header, content container, section headings) with Tailwind styling.",
+        "Theme does not rely on blue/purple as the primary palette.",
+        "UI components look consistent across list + forms (spacing, button styles, inputs, tables/cards)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Create/update global Tailwind entry styles and establish a neutral/emerald (or similar non-blue/purple) admin theme foundation (typography, spacing defaults, background/surface colors) to be reused across admin screens."
+        },
+        {
+          "path": "frontend/src/components/AppLayout.tsx",
+          "operation": "modify",
+          "description": "Apply consistent Tailwind layout styling (header, content container width, section spacing, headings) so all admin screens share the same structure."
+        },
+        {
+          "path": "frontend/src/pages/AdminDashboard.tsx",
+          "operation": "modify",
+          "description": "Ensure list + forms use consistent Tailwind spacing and shared component styling conventions (buttons, inputs, table/cards) and that the primary emphasis color is not blue/purple."
+        }
+      ]
+    }
+  ]
+}

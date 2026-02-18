@@ -1,0 +1,90 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-implement-admin-authorization-so-that-only-configured-admin-principals-can-perform-admin-only-actions-e-g-create-update-products-and-non-admin-users-are-denied",
+      "featureTitle": "Implement admin authorization so that only configured admin principals can perform admin-only actions (e.g., create/update products), and non-admin users are denied.",
+      "files": [
+        "frontend/src/hooks/useAdminStatus.ts",
+        "frontend/src/pages/AccessDenied.tsx",
+        "frontend/src/pages/AdminDashboard.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-an-admin-dashboard-ui-that-lets-an-admin-view-the-product-list-add-a-new-product-and-edit-an-existing-product",
+      "featureTitle": "Create an Admin Dashboard UI that lets an admin view the product list, add a new product, and edit an existing product.",
+      "files": [
+        "frontend/src/components/products/ProductForm.tsx",
+        "frontend/src/components/products/ProductList.tsx",
+        "frontend/src/pages/AdminDashboard.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-navigation-routing-so-admins-can-access-the-admin-dashboard-from-the-app-ui-and-non-admin-users-cannot-access-admin-only-pages",
+      "featureTitle": "Add navigation/routing so admins can access the Admin Dashboard from the app UI, and non-admin users cannot access admin-only pages.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/AppLayout.tsx",
+        "frontend/src/components/NavBar.tsx",
+        "frontend/src/main.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-establish-a-coherent-visual-theme-for-the-admin-dashboard-and-product-management-ui-colors-typography-spacing-and-layout-and-apply-it-consistently-across-admin-screens",
+      "featureTitle": "Establish a coherent visual theme for the admin dashboard and product management UI (colors, typography, spacing, and layout) and apply it consistently across admin screens.",
+      "files": [
+        "frontend/src/components/AppLayout.tsx",
+        "frontend/src/index.css",
+        "frontend/src/pages/AdminDashboard.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

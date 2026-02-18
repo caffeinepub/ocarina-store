@@ -1,0 +1,16 @@
+{
+  "frontend/src/index.css": "Global styles with emerald/teal OKLCH color theme for light and dark modes, replacing the default blue/purple palette with a fresh, professional look.",
+  "frontend/tailwind.config.js": "Tailwind configuration extended with Inter font family and custom shadow utilities to support the emerald/teal design system.",
+  "frontend/src/App.tsx": "Main application component with TanStack Router setup, theme provider, and toast notifications; handles routing between home, admin dashboard, and access denied pages.",
+  "frontend/src/components/AppLayout.tsx": "Root layout component that wraps all pages with consistent navigation header and footer structure.",
+  "frontend/src/components/NavBar.tsx": "Top navigation bar with authentication controls, admin link (visible only to admins), user profile display, and profile setup modal trigger.",
+  "frontend/src/components/Footer.tsx": "Footer component with copyright notice and attribution link to caffeine.ai with proper UTM tracking parameters.",
+  "frontend/src/components/ProfileSetupModal.tsx": "Modal dialog that prompts new users to enter their name on first login, with form validation and profile creation.",
+  "frontend/src/components/products/ProductForm.tsx": "Reusable form component for creating and editing products with validation for all required fields (ID, title, description, price, image reference).",
+  "frontend/src/components/products/ProductList.tsx": "Table component displaying all products with edit actions, loading states, and empty state messaging.",
+  "frontend/src/pages/Home.tsx": "Landing page with feature overview cards and conditional CTAs based on authentication and admin status.",
+  "frontend/src/pages/AdminDashboard.tsx": "Admin-only dashboard page with product list, add/edit forms, and authorization checks that redirect non-admins to access denied page.",
+  "frontend/src/pages/AccessDenied.tsx": "Dedicated access denied page with clear messaging for unauthorized users attempting to access admin routes.",
+  "frontend/src/hooks/useAdminStatus.ts": "React Query hook that checks if the current user has admin privileges using the backend's isCallerAdmin method.",
+  "frontend/src/hooks/useQueries.ts": "Centralized React Query hooks for all backend operations including user profiles and product CRUD with proper cache invalidation."
+}

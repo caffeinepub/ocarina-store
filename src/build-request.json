@@ -1,0 +1,123 @@
+{
+  "kind": "build_request",
+  "title": "Admin-only dashboard for adding and editing products",
+  "projectName": "Ocarina Store Admin",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Implement admin authorization so that only configured admin principals can perform admin-only actions (e.g., create/update products), and non-admin users are denied.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-user-1"
+        ],
+        "quotes": [
+          "Im admin, make admin dashboard with Admin only actions, like adding and edditing products"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend exposes an isAdmin-style check based on caller principal against an admin allowlist.",
+        "Any admin-only backend method rejects calls from non-admin principals with a clear error.",
+        "Frontend hides or disables admin-only UI for non-admin users and shows an \"Access denied\" state if they navigate directly to admin routes."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Add backend product management endpoints to create products and edit existing products (at minimum: title, description, price, and image references), restricted to admins.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-user-1"
+        ],
+        "quotes": [
+          "Im admin, make admin dashboard with Admin only actions, like adding and edditing products"
+        ]
+      },
+      "acceptanceCriteria": [
+        "There is a persistent Product data model stored in the canister.",
+        "Admin-only methods exist to create a product and update a product by id.",
+        "Attempting to update a non-existent product returns a clear not-found error.",
+        "All create/update methods enforce admin authorization."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Create an Admin Dashboard UI that lets an admin view the product list, add a new product, and edit an existing product.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-1"
+        ],
+        "quotes": [
+          "Im admin, make admin dashboard with Admin only actions, like adding and edditing products"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Admin Dashboard includes: (1) product table/list, (2) \"Add product\" form, (3) \"Edit product\" flow that pre-fills existing values.",
+        "Submitting add/edit calls the backend and refreshes the product list using React Query patterns.",
+        "Form validation prevents empty required fields (e.g., title, price) and shows user-friendly error messages in English."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Add navigation/routing so admins can access the Admin Dashboard from the app UI, and non-admin users cannot access admin-only pages.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-1"
+        ],
+        "quotes": [
+          "Im admin, make admin dashboard with Admin only actions, like adding and edditing products"
+        ]
+      },
+      "acceptanceCriteria": [
+        "An \"Admin\" nav entry is visible only to admins.",
+        "Directly visiting the admin route as a non-admin shows an English access-denied message and does not render admin tools.",
+        "Admins can reach the dashboard without console errors."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Establish a coherent visual theme for the admin dashboard and product management UI (colors, typography, spacing, and layout) and apply it consistently across admin screens.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-1"
+        ],
+        "quotes": [
+          "make admin dashboard"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Admin pages use a consistent layout (header, content container, section headings) with Tailwind styling.",
+        "Theme does not rely on blue/purple as the primary palette.",
+        "UI components look consistent across list + forms (spacing, button styles, inputs, tables/cards)."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor (all Motoko logic in the main actor).",
+    "Do not edit frontend files under the immutable paths provided by the system; compose existing UI components instead of modifying them in place.",
+    "Use English for all user-facing UI text."
+  ],
+  "nonGoals": [
+    "Do not implement third-party authentication providers (only Internet Identity is supported).",
+    "Do not implement external databases or non-IC storage services.",
+    "Do not implement real-time updates (no websockets)."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

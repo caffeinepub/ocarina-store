@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Store app where uploading multiple photos auto-creates one product per photo (default title “ocarina”) with generated descriptions, includes Stripe payments, and provides an admin-only dashboard to add/edit products.",
+  "architectural_notes": [],
+  "known_issues": [
+    "Build/request processing failed previously; user may need to retry or simplify request if it happens again."
+  ],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-implement-admin-authorization-so-that-only-configured-admin-principals-can-perform-admin-only-actions-e-g-create-update-products-and-non-admin-users-are-denied",
+      "title": "Implement admin authorization so that only configured admin principals can perform admin-only actions (e.g., create/update products), and non-admin users are denied.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-an-admin-dashboard-ui-that-lets-an-admin-view-the-product-list-add-a-new-product-and-edit-an-existing-product",
+      "title": "Create an Admin Dashboard UI that lets an admin view the product list, add a new product, and edit an existing product.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-navigation-routing-so-admins-can-access-the-admin-dashboard-from-the-app-ui-and-non-admin-users-cannot-access-admin-only-pages",
+      "title": "Add navigation/routing so admins can access the Admin Dashboard from the app UI, and non-admin users cannot access admin-only pages.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-establish-a-coherent-visual-theme-for-the-admin-dashboard-and-product-management-ui-colors-typography-spacing-and-layout-and-apply-it-consistently-across-admin-screens",
+      "title": "Establish a coherent visual theme for the admin dashboard and product management UI (colors, typography, spacing, and layout) and apply it consistently across admin screens.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Bulk photo upload that auto-creates one store product per photo",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Auto-generate product title (default: “ocarina”) and description for each created product",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Stripe payment setup for purchasing products",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Admin-only dashboard with admin actions (add/edit products)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Add backend product management endpoints to create products and edit existing products (at minimum: title, description, price, and image references), restricted to admins.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Ocarina Store Admin",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
